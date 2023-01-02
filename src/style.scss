@@ -83,6 +83,9 @@
         }
         .user {
           display: flex;
+          gap: 10x;
+          align-items: center;
+          padding: 10px;
           img {
             background-color: white;
             height: 36px;
@@ -90,11 +93,15 @@
             border-radius: 50%;
             object-fit: cover;
           }
-
+          span {
+            padding-left: 6px;
+            padding-right: 6px;
+          }
           button {
-            background-color: #8a566e;
+            background-color: #575170;
+            border: 1px solid #3f4e66;
+            border-radius: 3px;
             color: #ffe3e7;
-            border: none;
             cursor: pointer;
           }
         }
@@ -197,6 +204,76 @@
         img {
           height: 24px;
           cursor: pointer;
+        }
+      }
+      .messages {
+        background-color: #8a566e;
+        padding: 10px;
+        height: calc(100% - 160px);
+        overflow: scroll;
+        .message {
+          display: flex;
+          gap: 20px;
+          .message-info {
+            display: flex;
+            flex-direction: column;
+            color: 10px;
+            img {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+          }
+          .message-content {
+            max-width: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            p {
+              background-color: white;
+              padding: 10px 20px;
+              border-radius: 0px 10px 10px 10px;
+            }
+            img {
+              width: 50%;
+            }
+          }
+          &.owner {
+            flex-direction: row-reverse;
+          }
+        }
+      }
+      .input {
+        background-color: #ffe3e7;
+        height: 50px;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        input {
+          width: 100%;
+          border: none;
+          outline: none;
+          font-size: 16px;
+          &::placeholder {
+            color: lightgray;
+          }
+        }
+        .send {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          img {
+            height: 24px;
+            cursor: pointer;
+          }
+          button {
+            border: none;
+            padding: 10px 15px;
+            color: white;
+            background-color: #8a566e;
+          }
         }
       }
     }
