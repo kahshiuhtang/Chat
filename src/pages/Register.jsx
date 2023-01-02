@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [err, setErr] = useState(false);
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const username = e.target[0].value;
@@ -19,6 +21,8 @@ const Register = () => {
           username,
           email,
         });
+        await setDoc(doc(db, "user-chats", res.user.uid), {});
+        navigate("/");
       } catch (err) {
         console.log(err);
       }
