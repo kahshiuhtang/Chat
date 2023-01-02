@@ -1,3 +1,8 @@
+@mixin mobile {
+  @media scren and (max-width: 480px) {
+    @content;
+  }
+}
 .form-container {
   background-color: #9d5c63;
   height: 100vh;
@@ -234,6 +239,7 @@
               background-color: white;
               padding: 10px 20px;
               border-radius: 0px 10px 10px 10px;
+              max-width: max-content;
             }
             img {
               width: 50%;
@@ -241,6 +247,14 @@
           }
           &.owner {
             flex-direction: row-reverse;
+            .message-content {
+              align-items: flex-end;
+              p {
+                background-color: #ffe3e7;
+                color: black;
+                border-radius: 10px 0px 10px 10px;
+              }
+            }
           }
         }
       }
