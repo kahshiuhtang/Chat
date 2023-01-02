@@ -3,15 +3,20 @@
     @content;
   }
 }
+$col1: #9d5c63;
+$col2: #725473;
+$col3: #575170;
+$col4: #ffe3e7;
+
 .form-container {
-  background-color: #9d5c63;
+  background-color: $col1;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 
   .form-wrapper {
-    background-color: #725473;
+    background-color: $col2;
     padding: 20px 60px;
     border-radius: 10px;
     display: flex;
@@ -19,14 +24,14 @@
     flex-direction: column;
     align-items: center;
     .brand {
-      color: #9d5c63;
+      color: $col4;
       font-weight: bold;
       font-style: italic;
       font-size: 24px;
     }
 
     .title {
-      color: #9d5c63;
+      color: $col4;
       font-size: 14px;
     }
 
@@ -36,14 +41,14 @@
       gap: 15px;
       input {
         padding: 15px;
-        border: 2px solid #9d5c63;
+        border: 2px solid $col1;
         width: 300px;
         &::placeholder {
           color: rgb(175, 175, 175);
         }
       }
       button {
-        background-color: #9d5c63;
+        background-color: $col1;
         color: white;
         padding: 10px;
         font-weight: bold;
@@ -56,7 +61,7 @@
   }
 }
 .home {
-  background-color: #9d5c63;
+  background-color: $col1;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -71,7 +76,7 @@
     .sidebar {
       flex: 2;
       border-right: 1px solid white;
-      background-color: #575170;
+      background-color: $col3;
       color: #ffe3e7;
       .navbar {
         background-color: #3f4e66;
