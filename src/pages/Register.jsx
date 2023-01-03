@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const username = e.target[0].value;
@@ -44,7 +45,10 @@ const Register = () => {
           <button>Sign Up</button>
           {err && <span> Something Went Wrong!</span>}
         </form>
-        <p>Already Have An Account? Login</p>
+        <p>
+          Already Have An Account?
+          <Link to="/login"> Login</Link>
+        </p>
       </div>
     </div>
   );

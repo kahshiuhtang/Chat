@@ -1,17 +1,30 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { db } from "../firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+  doc,
+  updateDoc,
+  serverTimestamp,
+} from "firebase/firestore";
+import { AuthContext } from "../context/AuthContext";
 
 const Search = () => {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [err, setErr] = useState(false);
 
+  const { currentUser } = useContext(AuthContext);
+
   const handleSearch = async () => {
     try {
       const q = query(
         collection(db, "users"),
-        where("displayname", "==", username)
+        where("username", "==", username)
       );
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
@@ -24,7 +37,40 @@ const Search = () => {
   const handleKey = (e) => {
     e.code == "Enter" && handleSearch();
   };
-  const handleClick = () => {};
+  const handleClick = async () => {
+    //check whether group exists
+    const combinedId =
+      currentUser.uid > user.uid
+        ? currentUser.uid + user.uid
+        : user.uid + currentUser.uid;
+    console.log(currentUser.uid);
+    console.log(user.uid);
+    try {
+      const res = await getDoc(doc(db, "chat", combinedId));
+      if (!res.exists()) {
+        await setDoc(doc(db, "chats", combinedId), { messages: [] });
+        await updateDoc(doc(db, "user-chats", currentUser.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: user.uid,
+            displayName: user.displayName,
+          },
+          [combinedId + ".data"]: serverTimestamp(),
+        });
+        await updateDoc(doc(db, "user-chats", user.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: currentUser.uid,
+            displayName: currentUser.displayName,
+          },
+          [combinedId + ".data"]: serverTimestamp(),
+        });
+      }
+    } catch (err) {
+      setErr(true);
+      console.log(err);
+    }
+    setUser(null);
+    setUsername("");
+  };
   //Need to change
   return (
     <div className="search">
@@ -34,6 +80,7 @@ const Search = () => {
           placeholder="Find A User"
           onKeyDown={handleKey}
           onChange={(e) => setUsername(e.target.value)}
+          value={username}
         ></input>
       </div>
       {err && <p> User Not Found</p>}

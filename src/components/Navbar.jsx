@@ -13,7 +13,7 @@ const Navbar = () => {
           src="https://www.wikihow.com/images/thumb/7/70/Draw-Yourself-As-a-Manga-Girl_Boy-Step-12.jpg/aid766412-v4-1200px-Draw-Yourself-As-a-Manga-Girl_Boy-Step-12.jpg"
           alt="Profile"
         />
-        <span>{currentUser.displayname}</span>
+        <span>{currentUser.username}</span>
         <button onClick={() => signOut(auth)}>Log Out</button>
       </div>
     </div>
