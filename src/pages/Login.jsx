@@ -11,6 +11,7 @@ const Login = () => {
     e.preventDefault();
     const email = e.target[0].value;
     const password = e.target[1].value;
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/");
@@ -24,10 +25,10 @@ const Login = () => {
       <div className="form-wrapper">
         <span className="brand">TangTalks</span>
         <span className="title">Login</span>
-        <form>
-          <input type="text" placeholder="username" />
+        <form onSubmit={handleSubmit}>
+          <input type="email" placeholder="email" />
           <input type="password" placeholder="password" />
-          <button onSubmit={handleSubmit}>Log In</button>
+          <button>Log In</button>
         </form>
         <p>
           Don't Have An Account?
