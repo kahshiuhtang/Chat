@@ -43,8 +43,6 @@ const Search = () => {
       currentUser.uid > user.uid
         ? currentUser.uid + user.uid
         : user.uid + currentUser.uid;
-    console.log(currentUser.uid);
-    console.log(user.uid);
     try {
       const res = await getDoc(doc(db, "chat", combinedId));
       if (!res.exists()) {
@@ -52,14 +50,14 @@ const Search = () => {
         await updateDoc(doc(db, "user-chats", currentUser.uid), {
           [combinedId + ".userInfo"]: {
             uid: user.uid,
-            displayName: user.displayName,
+            username: user.username,
           },
           [combinedId + ".data"]: serverTimestamp(),
         });
         await updateDoc(doc(db, "user-chats", user.uid), {
           [combinedId + ".userInfo"]: {
             uid: currentUser.uid,
-            displayName: currentUser.displayName,
+            username: currentUser.username,
           },
           [combinedId + ".data"]: serverTimestamp(),
         });

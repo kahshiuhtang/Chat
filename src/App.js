@@ -2,10 +2,9 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import "./style.scss";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
-import { Navigate } from "react-router-dom";
 function App() {
   const { currentUser } = useContext(AuthContext);
   const ProtectedRoute = ({ children }) => {
@@ -14,7 +13,6 @@ function App() {
     }
     return children;
   };
-  console.log(currentUser);
   return (
     <BrowserRouter>
       <Routes>
